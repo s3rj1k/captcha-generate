@@ -8,6 +8,7 @@ import (
 	"image/jpeg"
 	"os"
 	"strings"
+	"time"
 
 	captcha "github.com/s3rj1k/captcha"
 	"golang.org/x/crypto/blake2s"
@@ -17,7 +18,7 @@ import (
 
 const (
 	outFile        = "captcha.gob"
-	uniqueCaptchas = 5000
+	uniqueCaptchas = 420
 
 	defaultCharsList = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 )
@@ -75,11 +76,13 @@ func main() {
 		data.Map[getStringHash(captchaObj.Text)] = base64.StdEncoding.EncodeToString(buff.Bytes())
 	}
 
+	startTime := time.Now()
+
 	for {
-		fmt.Printf("\r1/3. Unique CAPTCHAs Generated: %d.", len(data.Map))
+		fmt.Printf("\r* Unique CAPTCHAs Generated: %d.", len(data.Map))
 
 		if len(data.Map) == uniqueCaptchas {
-			fmt.Printf("\n")
+			fmt.Printf("\n* Elapsed Time: %s.\n", time.Now().Sub(startTime).String())
 
 			break
 		}
@@ -89,13 +92,13 @@ func main() {
 
 	data.Keys = make([]string, 0, len(data.Map))
 
-	fmt.Printf("2/3. Processing Keys.\n")
+	fmt.Printf("* Processing Keys.\n")
 
 	for k := range data.Map {
 		data.Keys = append(data.Keys, k)
 	}
 
-	fmt.Printf("3/3. Creating GOB File.\n")
+	fmt.Printf("* Creating GOB File.\n")
 
 	file, err := os.Create(outFile)
 	if err != nil {
