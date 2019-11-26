@@ -1,6 +1,6 @@
 GO_BIN ?= go
 ENV_BIN ?= env
-OUT_BIN = captcha-generate
+OUT_BIN = captcha-generate-image
 
 export PATH := $(PATH):/usr/local/go/bin
 

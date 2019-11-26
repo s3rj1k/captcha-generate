@@ -1,4 +1,4 @@
-module captcha-generate
+module captcha-generate-image
 
 go 1.13
 
