@@ -17,7 +17,7 @@ import (
 
 const (
 	outFile        = "captcha.gob"
-	uniqueCaptchas = 50
+	uniqueCaptchas = 5000
 
 	defaultCharsList = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 )
@@ -89,13 +89,13 @@ func main() {
 
 	data.Keys = make([]string, 0, len(data.Map))
 
-	fmt.Printf("2/3. Processing keys.\n")
+	fmt.Printf("2/3. Processing Keys.\n")
 
 	for k := range data.Map {
 		data.Keys = append(data.Keys, k)
 	}
 
-	fmt.Printf("3/3. Creating gob file.\n")
+	fmt.Printf("3/3. Creating GOB File.\n")
 
 	file, err := os.Create(outFile)
 	if err != nil {
